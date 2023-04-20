@@ -33,6 +33,10 @@ app.get('/delete/:id', (req, res)=>{
     res.render('index', {arr_tarefas: tarefas});
 })
 
+app.post('', (req, res)=>{
+    console.log(req.body.tarefa);
+})
+
 // Definimos que nosso servidor irá rodar na porta 5000.
 // O Express é uma dependencia que se baseia em rotas (tipo o parse_url do php);
 app.listen(5000, ()=>{

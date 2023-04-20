@@ -9,6 +9,12 @@
             <h2>App Lista de Tarefas</h2>
         </header>
         <div class="tarefas">
+            <form method="POST">
+                <input type="text" name="tarefa" placeholder="adicione uma tarefa">
+                <button type="submit">
+                    <i class="bi bi-send-fill"></i> Definir e Salva Tarefa
+                </button>
+            </form>
             <% for(let i = 0; i < arr_tarefas.length; i++) { %>
                 <p>
                     <span><i class="bi bi-list-check"></i> <%= arr_tarefas[i] %></span>

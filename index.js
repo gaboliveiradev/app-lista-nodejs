@@ -1,8 +1,15 @@
 // Fazendo a requisição da dependencia Express
 const express = require('express');
 const path = require('path');
+var bodyParser = require('body-parser');
 
 const app = express();
+
+// Body-Parse é um package necessário para o EXPRESS suportar integrações com formulários.
+app.use(bodyParser.json()); // suporte ao json encode body
+app.use(bodyParser.urlencoded({ // suporte  ao URL-Encoded body
+    extended: true
+}));
 
 app.engine('html', require('ejs').renderFile); // Setando que vou utilizar o EJS para renderizar nossos arquivos html
 app.set('view engine', 'html');
@@ -12,7 +19,7 @@ app.set('view engine', 'html');
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views')); // Setando a pasta onde ficará minhas views. (mesmo role para pegar o dir completo)
 
-var tarefas = ['Arrumar o Quarto', 'Comprar no Supermercado'];
+var tarefas = [];
 
 // Criando a rota "/" e definindo uma função de callback, onde ela recebe dois parametros:
 // req = requisição
@@ -34,7 +41,8 @@ app.get('/delete/:id', (req, res)=>{
 })
 
 app.post('', (req, res)=>{
-    console.log(req.body.tarefa);
+    tarefas.push(req.body.tarefa);
+    res.render('index', {arr_tarefas: tarefas});
 })
 
 // Definimos que nosso servidor irá rodar na porta 5000.
